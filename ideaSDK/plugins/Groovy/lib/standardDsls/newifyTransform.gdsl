@@ -1,0 +1,36 @@
+import com.intellij.psi.PsiClass
+
+contributor(context(scope:annotatedScope(ctype: "groovy.lang.Newify"))) {
+  // For methods
+  def memb = enclosingMember()
+  if (memb) {
+    // For classes
+    def newifyName = "groovy.lang.Newify"
+    def annotated = memb.getAnnotations(newifyName)
+
+    def clazz = enclosingClass()
+    if (clazz) {
+      annotated += clazz.getAnnotations(newifyName)
+    }
+    for (a in annotated) {
+      def refs = a.findAttributeValue("value")
+      def auto  = a.findAttributeValue("auto")
+      //For Python-like style
+      if (refs && !place.qualifier) {
+        for (c in refs.asList()) {
+          def targetClass = c.bind()
+          for (cons in (targetClass?.constructors ?: [])) {
+            method name: ((PsiClass) targetClass).name, params: cons.paramStringVector, type: targetClass.qualName
+          }
+        }
+      }
+
+      // For Ruby-like style
+      if (!auto || auto.eval()) {
+        for (cons in psiClass?.getConstructors()) {
+          method name: 'new', isStatic: true, params: cons.paramStringVector, type: psiClass?.qualName ?: "java.lang.Object"
+        }
+      }
+    }
+  }
+}
