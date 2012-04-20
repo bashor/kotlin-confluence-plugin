@@ -4,7 +4,7 @@ import com.atlassian.renderer.v2.macro.MacroException;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.jetbrains.jet.confluence.TestUtils;
+import org.jetbrains.jet.confluence.Utils;
 import org.jetbrains.jet.lexer.JetMacro;
 
 import java.io.File;
@@ -50,7 +50,7 @@ public class ConfluenceRenderingTest extends TestCase {
     }
 
     private void checkSourceFile(File sourceFile) throws IOException, MacroException {
-        String source = TestUtils.readFile(sourceFile);
+        String source = Utils.readFile(sourceFile);
 
         StringBuilder actualResult = new StringBuilder();
         new JetMacro().generateHtmlFromCode(source, actualResult);
@@ -58,14 +58,14 @@ public class ConfluenceRenderingTest extends TestCase {
         File expectedResultFile = new File(sourceFile.getAbsolutePath().replace(".kt", ".txt"));
         if (!expectedResultFile.exists()) {
             expectedResultFile.createNewFile();
-            TestUtils.writeFile(expectedResultFile, TestUtils.divideResultForLines(actualResult.toString()));
+            Utils.writeFile(expectedResultFile, Utils.divideResultForLines(actualResult.toString()));
             assertTrue("File with expected result for " + expectedResultFile.getAbsolutePath() + " is absent.", false);
         }
 
-        String expectedResult = TestUtils.readFile(expectedResultFile);
+        String expectedResult = Utils.readFile(expectedResultFile);
 
 
         assertEquals(expectedResult,
-                TestUtils.divideResultForLines(actualResult.toString()));
+                Utils.divideResultForLines(actualResult.toString()));
     }
 }

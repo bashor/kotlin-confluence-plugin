@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author Natalia.Ukhorskaya
  */
 
-public class TestUtils {
+public class Utils {
 
     public static String readFile(File file) throws IOException {
         FileReader reader = new FileReader(file);
@@ -29,6 +29,6 @@ public class TestUtils {
     }
 
     public static String divideResultForLines(String result) {
-       return result.replaceAll("<div class=\"line\">", "\n<div class=\"line\">");
+       return result.replaceAll("<div class=\"line\">", System.getProperty("line.separator") + "<div class=\"line\">");
     }
 }
