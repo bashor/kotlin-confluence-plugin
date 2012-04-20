@@ -1,3 +1,0 @@
-$action.getText('edit${contentType}.help.text')
-
-#parse ("/includes/notation-quick-help.vm")
