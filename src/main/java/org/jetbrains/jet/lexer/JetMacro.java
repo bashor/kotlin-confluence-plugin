@@ -170,14 +170,39 @@ public class JetMacro extends BaseMacro {
         return "</div>";
     }
 
-    private void convertNewLines(StringBuilder result, String yytext) {
+    private void processToken(StringBuilder result, String yytext, String style) {
+        int lastWrittenChar = 0;
         for (int i = 0; i < yytext.length(); i++) {
             if (yytext.charAt(i) == '\n') {
-                result.append("&nbsp;");
+                addPartOfStringBeforeNewLineToResult(result, yytext, lastWrittenChar, i, style);
                 result.append(addNewLineCloseTag());
                 result.append(addNewLineOpenTag());
+                lastWrittenChar = i + 1;
             }
         }
+
+        addPartOfStringBeforeNewLineToResult(result, yytext, lastWrittenChar, yytext.length(), style);
+    }
+
+    private void addPartOfStringBeforeNewLineToResult(StringBuilder result, String yytext, int start, int end, String style) {
+        String substrRes = yytext.substring(start, end);
+        if (substrRes.length() == 0 && end != yytext.length()) {
+            result.append("&nbsp;");
+        }
+        else {
+            result.append("<code class=\"jet ").append(style).append("\">");
+            ConfluenceUtils.escapeHTML(result, substrRes);
+            result.append("</code>");
+        }
+    }
+
+    private boolean checkSpaces(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -242,10 +267,6 @@ public class JetMacro extends BaseMacro {
 //                CharSequence yytext = jetLexer.yytext();
                 String yytext = jetLexer.yytext().toString();
 
-                if (yytext.contains("\n")) {
-                    convertNewLines(result, yytext);
-                    yytext = yytext.replaceAll("\n", "");
-                }
 
                 String style = null;
                 if (token instanceof JetKeywordToken) {
@@ -253,7 +274,7 @@ public class JetMacro extends BaseMacro {
                 }
                 else if (token == JetTokens.IDENTIFIER) {
                     for (IElementType softKeyword : JetTokens.SOFT_KEYWORDS.asSet()) {
-                        if (((JetKeywordToken) softKeyword).getValue().equals(yytext.toString())) {
+                        if (((JetKeywordToken) softKeyword).getValue().equals(yytext)) {
                             style = "softkeyword";
                             break;
                         }
@@ -266,9 +287,8 @@ public class JetMacro extends BaseMacro {
                 else {
                     style = "plain";
                 }
-                result.append("<code class=\"jet ").append(style).append("\">");
-                ConfluenceUtils.escapeHTML(result, yytext);
-                result.append("</code>");
+
+                processToken(result, yytext, style);
             }
 
             result.append(addNewLineCloseTag());
