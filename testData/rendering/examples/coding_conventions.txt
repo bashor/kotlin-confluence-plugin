@@ -1,0 +1,13 @@
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent"><div class="container">
+<div class="line"><code class="jet jet-comment">/**</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;This&nbsp;is&nbsp;**bold**</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;New&nbsp;paragraph&nbsp;using&nbsp;newlines.</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;We&nbsp;can&nbsp;also&nbsp;support&nbsp;wiki&nbsp;links&nbsp;notation</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;for&nbsp;example&nbsp;[[List]]&nbsp;and&nbsp;[[Collection]]&nbsp;and&nbsp;[[java.util.Collection.size()]]&nbsp;will</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;generate&nbsp;hypertext&nbsp;links&nbsp;to&nbsp;classes</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*&nbsp;@includeFunctionBody&nbsp;../test/MyTest.kt&nbsp;someFunction</code></div>
+<div class="line"><code class="jet jet-comment">&nbsp;*/</code>&nbsp;</div>
+<div class="line"><code class="jet whitespace"></code><code class="jet keyword">fun</code><code class="jet whitespace">&nbsp;</code><code class="jet plain">anotherMethod</code><code class="jet plain">(</code><code class="jet plain">)</code><code class="jet plain">:</code><code class="jet whitespace">&nbsp;</code><code class="jet plain">Unit</code><code class="jet whitespace">&nbsp;</code><code class="jet plain">{</code><code class="jet whitespace">&nbsp;</code><code class="jet plain">..</code><code class="jet plain">.</code><code class="jet whitespace">&nbsp;</code><code class="jet plain">}</code></div></div></div></div>
