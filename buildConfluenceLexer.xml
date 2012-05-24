@@ -1,14 +1,14 @@
 <project name="ConfluenceLexer" default="confluenceLexer">
     <property name="home" value="${basedir}"/>
-    <property file="${home}/../ideaSDK/bin/idea.properties"/>
+    <property file="${home}/build.lexer.properties"/>
 
-    <property name="flex.base" value="${idea.home}/tools/lexer/jflex-1.4"/>
+    <property name="flex.base" value="${idea.sources.dir}/tools/lexer/jflex-1.4"/>
     <property name="out.dir" value="${basedir}/tmpout"/>
 
     <macrodef name="flex">
       <attribute name="flexfile"/>
       <attribute name="destdir"/>
-      <attribute name="skeleton" default="${idea.home}/tools/lexer/idea-flex.skeleton"/>
+      <attribute name="skeleton" default="${idea.sources.dir}/tools/lexer/idea-flex.skeleton"/>
       <sequential>
         <delete dir="${out.dir}"/>
         <mkdir dir="${out.dir}"/>
@@ -38,9 +38,9 @@
     <target name="confluenceLexer">
         <echo message="${flex.base}"/>
         <echo message="${home}"/>
-        <flex flexfile="${home}/../compiler/frontend/src/org/jetbrains/jet/lexer/Jet.flex"
+        <flex flexfile="${kotlin.sources.dir}/compiler/frontend/src/org/jetbrains/jet/lexer/Jet.flex"
               destdir="${home}/src/main/java/org/jetbrains/jet/lexer/"/>
-        <copy file="${home}/../compiler/frontend/src/org/jetbrains/jet/lexer/JetTokens.java"
+        <copy file="${kotlin.sources.dir}/compiler/frontend/src/org/jetbrains/jet/lexer/JetTokens.java"
                   tofile="${home}/src/main/java/org/jetbrains/jet/lexer/JetTokens.java" overwrite="true"/>
     </target>
 </project>
