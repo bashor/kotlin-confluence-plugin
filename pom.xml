@@ -6,8 +6,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jetbrains.jet</groupId>
-    <artifactId>confluence</artifactId>
-    <version>1.0</version>
+    <artifactId>kotlin-confluence-plugin</artifactId>
+    <version>1.2</version>
 
     <organization>
         <name>JetBrains</name>
